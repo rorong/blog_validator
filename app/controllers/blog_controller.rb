@@ -34,7 +34,7 @@
     
     def filter_tasks(tasks_response)
       tasks = tasks_response["tasks"]
-      tasks.select { |task| task["status"] == "completed" && task["blog"] != nil }
+      tasks.select { |task| task["status"] == "pending" && task["blog"] != nil }
     end
   
     def set_auth_token

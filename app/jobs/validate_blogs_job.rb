@@ -27,7 +27,6 @@ end
     prompt_template = <<-PROMPT
     "Evaluate the following blog post for validity:
 
-    Topic: '{topic}'
 
     Criteria for determining validity:
     1. Relevance: Assess whether the content is relevant to the intended audience and aligns with the blog's theme.
@@ -42,7 +41,7 @@ end
     {blog}"
   PROMPT
 
-    prompt = Langchain::Prompt::PromptTemplate.new(template: prompt_template, input_variables: ["topic", "blog"]).format(topic: task[:description], blog: blog)
+    prompt = Langchain::Prompt::PromptTemplate.new(template: prompt_template, input_variables: ["blog"]).format( blog: blog)
     llm = Langchain::LLM::OpenAI.new(api_key: ENV["OPENAI_ACCESS_TOKEN"])
     response = llm.chat(messages: [{ role: "user", content: prompt }]).completion
   end
