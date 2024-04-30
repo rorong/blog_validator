@@ -6,6 +6,9 @@ class ValidateBlogsJob
   def perform(tasks,auth_token)
     @auth_token = auth_token
     tasks.each_slice(BATCH_SIZE) do |batch_tasks|
+
+      update_task_statuses(batch_tasks, "in_progress")
+
       blogs = batch_tasks.map { |task| task["blog"] }
       validate_blog(batch_tasks,blogs)
     end
@@ -18,7 +21,9 @@ def validate_blog(tasks,blogs)
    response =  blog_template(task ,blogs[index])
    if response.start_with?("Yes")
     update_task_statuses([task], "validated")
-  end
+   else
+    update_task_statuses([task], "failure")
+   end
   end
 end
   
@@ -54,7 +59,7 @@ end
           project_id: task["project_id"],
           organization_id: task["organization_id"],
           task: {
-            status: "validated",
+            status: status,
           }
         }
         options = { headers: { "Authorization" => @auth_token }, body: params }

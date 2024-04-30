@@ -4,7 +4,7 @@
   
     def validate
       fetch_tasks
-      render json: { message: "Blog creation process initiated" }, status: :accepted
+      render json: { message: "Blog validation process initiated" }, status: :accepted
   
     end
     
