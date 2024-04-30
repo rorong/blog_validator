@@ -16,7 +16,6 @@ class ValidateBlogsJob
 def validate_blog(tasks,blogs)
   tasks.each_with_index do |task, index |
    response =  blog_template(task ,blogs[index])
-   debugger
    if response.start_with?("Yes")
     update_task_statuses([task], "validated")
   end
