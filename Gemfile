@@ -67,3 +67,8 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+gem "langchainrb"
+gem "ruby-openai"
+gem 'dotenv-rails'
+gem "httparty"
+gem 'sidekiq'
