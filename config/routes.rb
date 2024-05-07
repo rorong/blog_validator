@@ -10,5 +10,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   
-  get "validate" , to: "blog#validate"
+  post "validate" , to: "blog#validate"
 end
